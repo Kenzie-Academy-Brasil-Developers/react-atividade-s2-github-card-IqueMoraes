@@ -6,6 +6,7 @@ export default function Button({
   setConditional,
   setCardList,
   cardList,
+  setError,
 }) {
   function CleanInput() {
     setInputValue("");
@@ -17,12 +18,10 @@ export default function Button({
       return setConditional("empty");
     }
 
-    fetch(`https://api.github.com/repos/${inputValue}`).then((res) =>
-      res.json()
-    );
-    // .then((res) => setCardList([...cardList, res]))
-
-    //   .catch((error) => setConditional(error.message));
+    fetch(`https://api.github.com/repos/${inputValue}`)
+      .then((res) => res.json())
+      .then((res) => setCardList([...cardList, res]))
+      .catch((error) => setError(error));
 
     CleanInput();
   }

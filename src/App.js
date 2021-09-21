@@ -13,32 +13,37 @@ import { DivInput } from "./components/stylesTags/DivInput";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [conditional, setConditional] = useState("");
-  const [cardList, setCardList] = useState([
-    {
-      owner: {
-        avatar_url: "https://avatars.githubusercontent.com/u/69631?v=4",
-      },
-      id: 10270250,
-      name: "react",
-      html_url: "https://github.com/facebook/react",
-    },
-    {
-      owner: {
-        avatar_url: "https://avatars.githubusercontent.com/u/69631?v=4",
-      },
-      id: 10270250,
-      name: "react",
-      html_url: "https://github.com/facebook/react",
-    },
-    {
-      owner: {
-        avatar_url: "https://avatars.githubusercontent.com/u/69631?v=4",
-      },
-      id: 10270250,
-      name: "react",
-      html_url: "https://github.com/facebook/react",
-    },
-  ]);
+  const [cardList, setCardList] = useState([]);
+  const [cardList2, setCardList2] = useState([]);
+
+  const [error, setError] = useState("");
+
+  // const [cardList, setCardList] = useState([
+  //   {
+  //     owner: {
+  //       avatar_url: "https://avatars.githubusercontent.com/u/69631?v=4",
+  //     },
+  //     id: 10270250,
+  //     name: "react",
+  //     html_url: "https://github.com/facebook/react",
+  //   },
+  //   {
+  //     owner: {
+  //       avatar_url: "https://avatars.githubusercontent.com/u/69631?v=4",
+  //     },
+  //     id: 10270250,
+  //     name: "react",
+  //     html_url: "https://github.com/facebook/react",
+  //   },
+  //   {
+  //     owner: {
+  //       avatar_url: "https://avatars.githubusercontent.com/u/69631?v=4",
+  //     },
+  //     id: 10270250,
+  //     name: "react",
+  //     html_url: "https://github.com/facebook/react",
+  //   },
+  // ]);
 
   return (
     <div className="App">
@@ -57,13 +62,18 @@ function App() {
             setConditional={setConditional}
             setCardList={setCardList}
             cardList={cardList}
+            setError={setError}
           />
           {conditional && (
             <AlertParagraph>Atenção! Campo de busca vazio.</AlertParagraph>
           )}
+          {error ? (
+            <AlertParagraph>Repositório não encontrado.</AlertParagraph>
+          ) : (
+            <GitHub conditional={conditional} cardList={cardList} />
+          )}
         </DivInput>
         {/* <div> */}
-        <GitHub conditional={conditional} cardList={cardList} />
         {/* </div> */}
       </header>
     </div>

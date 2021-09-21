@@ -18,16 +18,6 @@ export default function Input({
         }}
         placeholder="Digite o nome do repositório"
       />
-      {/* <input
-        className={conditional}
-        type="text"
-        value={inputValue}
-        onChange={(e) => {
-          setInputValue(e.target.value);
-          //   console.log(e.target.value);
-        }}
-        placeholder="Digite o nome do repositório"
-      /> */}
     </>
   );
 }
