@@ -1,7 +1,7 @@
 import { DivGithubCard } from "../stylesTags/DivGithubCard";
 import { ImgAvatar } from "../stylesTags/Img";
 
-export default function GitHub({ conditional, cardList }) {
+export default function GitHub({ cardImage, cardList }) {
   return (
     <>
       {cardList &&
@@ -10,7 +10,7 @@ export default function GitHub({ conditional, cardList }) {
             <ImgAvatar
               className="avatar"
               alt="Avatar do repositório"
-              src={item.owner.avatar_url}
+              src={cardImage}
             />
             <h2>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h2>
             <a href={item.html_url}>Acesso</a>

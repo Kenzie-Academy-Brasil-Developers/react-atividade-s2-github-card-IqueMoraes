@@ -3,24 +3,23 @@ import { SearchButton } from "../stylesTags/ButtonStyled";
 export default function Button({
   inputValue,
   setInputValue,
-  setConditional,
+  setCardImage,
   setCardList,
   cardList,
   setError,
 }) {
   function CleanInput() {
     setInputValue("");
-    setConditional("");
   }
 
   function handleSearch() {
-    if (inputValue === "") {
-      return setConditional("empty");
-    }
-
     fetch(`https://api.github.com/repos/${inputValue}`)
       .then((res) => res.json())
-      .then((res) => setCardList([...cardList, res]))
+      .then((res) => {
+        setCardList([res]);
+        setError("");
+        setCardImage(res.owner.avatar_url);
+      })
       .catch((error) => setError(error));
 
     CleanInput();
@@ -28,7 +27,18 @@ export default function Button({
 
   return (
     <>
-      <SearchButton onClick={() => handleSearch()}>Pesquisar</SearchButton>
+      {inputValue === "" ? (
+        <SearchButton
+          style={{ backroundColor: "gray", cursor: "not-allowed" }}
+          disabled={true}
+        >
+          Campo vazio. Digite para pesquisar.
+        </SearchButton>
+      ) : (
+        <SearchButton disabled={false} onClick={() => handleSearch()}>
+          Pesquisar
+        </SearchButton>
+      )}
     </>
   );
 }
